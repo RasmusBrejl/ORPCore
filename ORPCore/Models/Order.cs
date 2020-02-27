@@ -1,4 +1,5 @@
 ﻿using System;
+using ORPCore.Models;
 
 namespace ORP.Models
 {

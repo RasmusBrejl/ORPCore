@@ -1,15 +1,17 @@
-﻿using ORP.Business.Extensions;
-using ORP.Business.Repositories;
-using ORP.Models;
-using ORP.Models.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using ORP.Business.Extensions;
+using ORP.Business.Repositories;
+using ORP.Models;
+using ORP.Models.Enums;
+using ORPCore.Business.Repositories;
+using ORPCore.Models;
 
-namespace ORP.Business.Services
+namespace ORPCore.Business.Services
 {
 	public class RouteService
 	{
@@ -100,6 +102,29 @@ namespace ORP.Business.Services
 			{
 				Duration = Settings.FlightDuration,
 				Price = totalPrice
+			};
+		}
+
+		public List<Connection> GetConnectionsForCity(City city)
+		{
+			return _connectionRepository.GetConnections(city);
+		}
+
+		public ConnectionData GetConnectionDataBoat(Parcel parcel)
+		{
+			return new ConnectionData()
+			{
+				Duration = 20f,
+				Price = 10f
+			};
+		}
+
+		public ConnectionData GetConnectionDataCar(Parcel parcel)
+		{
+			return new ConnectionData()
+			{
+				Duration = 10f,
+				Price = 20f
 			};
 		}
 

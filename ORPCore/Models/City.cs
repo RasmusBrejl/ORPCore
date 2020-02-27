@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ORP.Models
+﻿namespace ORPCore.Models
 {
 	public class City
 	{

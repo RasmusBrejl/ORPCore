@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ORP.Models;
 using ORP.Models.Context;
+using ORPCore.Models;
 
 namespace ORP.Business.Repositories
 {
