@@ -15,5 +15,11 @@ namespace ORP.Models.Context
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Parcel> Parcels { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                "Data Source=dbs-oapl.database.windows.net;Initial Catalog=db-prod;User ID=dbs-oapl;Password=oceanicFlyAway16");
+        }
     }
 }

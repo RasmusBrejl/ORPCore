@@ -7,5 +7,9 @@ namespace ORP.Models
 		public int CityId { get; set; }
 		public string Name { get; set; }
 		public int NumberOfHits { get; set; }
+
+        public bool Valid { get; set; }
+
+        public float PricePenalty { get; set; }
     }
 }
