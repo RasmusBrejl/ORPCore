@@ -5,9 +5,13 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { User } from './user';
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class UserService {
 
-endpoint: string = 'http://localhost:3000/api/user/';
+endpoint: string = 'http://localhost:4002/user/';
 
 constructor(private http: HttpClient, ) { 
     const httpOptions = {
@@ -23,8 +27,13 @@ private extractData(res: Response) {
   }
 
   tryLogIn(user: User): Observable<any> {
-    return this.http.get(this.endpoint).pipe(
+    console.log(user);
+    var requestRoute = this.endpoint + "?Username=" + user.name + "&Password=" + user.password;
+    return this.http.get(requestRoute).pipe(
       map(this.extractData));
   }
 
+  public changeName(event) {
+    console.log(event);
+  }
 }

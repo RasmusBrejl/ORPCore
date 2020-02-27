@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../User.Service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'user-login-component',
@@ -11,11 +12,14 @@ export class UserLoginComponent {
 
  //private userService: UserService;
 
- public constructor() {
+ public constructor(private userService: UserService) {
     
  }
   public user: User;
   public loginfailed: boolean;
+  public userlogin: any;
+
+public playerName: any;
 
   public ngOnInit() {
     this.user = new User();
@@ -23,12 +27,16 @@ export class UserLoginComponent {
   }
 
   public login(){
-    
+    console.log(this.user);
+    console.log(this.playerName);
     this.loginfailed = !this.loginfailed;
-    // var userLogin = this.userService.tryLogIn(this.user);
+    var userLogin = this.userService.tryLogIn(this.user);
+    console.log(userLogin);
     // if(!userLogin) {
     //   this.loginfailed = true;
     // }
   }
-
+  public onKey(event: any) { // without type info
+    console.log(event);
+  }
 }
