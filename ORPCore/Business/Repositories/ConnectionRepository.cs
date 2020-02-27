@@ -10,7 +10,7 @@ namespace ORP.Business.Repositories
 		{
             using (var context = new OrpContext())
             {
-                return context.Connections.FirstOrDefault(x => x.CityOne == cityFrom && x.CityTwo == cityTo);
+                return context.Connections.FirstOrDefault(x => x.CityOne == cityFrom.Name && x.CityTwo == cityTo.Name);
             }
 		}
 	}
