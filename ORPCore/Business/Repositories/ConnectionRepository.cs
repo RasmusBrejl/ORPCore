@@ -20,7 +20,7 @@ namespace ORPCore.Business.Repositories
 		{
 			using (var context = new OrpContext())
 			{
-				return context.Connections.Where(c => c.CityOne == city || c.CityTwo == city).ToList();
+				return context.Connections.Where(c => c.CityOne == city.Name || c.CityTwo == city.Name).ToList();
 			}
 		}
 	}

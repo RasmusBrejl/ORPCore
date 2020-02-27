@@ -27,10 +27,15 @@ namespace ORPCore.Business.Services
 
 		public Connection GetConnection(string cityFromName, string cityToName)
 		{
-			var cityFrom = _cityRepository.GetCity(cityFromName);
-			var cityTo = _cityRepository.GetCity(cityToName);
+			var cityFrom = GetCity(cityFromName);
+			var cityTo = GetCity(cityToName);
 
 			return _connectionRepository.GetConnection(cityFrom, cityTo);
+		}
+
+		public City GetCity(string cityName)
+		{
+			return _cityRepository.GetCity(cityName);
 		}
 
 		public ConnectionData GetConnectionData(Parcel parcel, out string errorMessage)

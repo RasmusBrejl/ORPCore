@@ -19,7 +19,7 @@ namespace ORPCore.Tests.Business
 		private static Parcel parcel;
 
 		[ClassInitialize]
-		public static void Setup(TestContext )
+		public static void Setup(TestContext context)
 		{
 			parcel = new Parcel()
 			{

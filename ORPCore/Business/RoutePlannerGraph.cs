@@ -54,11 +54,12 @@ namespace ORPCore.Business
 
 			foreach (var connection in connections)
 			{
-				var nextCity = connection.CityOne == currentNode.City ? connection.CityTwo : connection.CityOne;
-				if (!nextCity.Valid)
+				var nextCityName = connection.CityOne == currentNode.City.Name ? connection.CityTwo : connection.CityOne;
+				if (_visitedNodes.FirstOrDefault(n => n.City.Name.Equals(nextCityName)) != null)
 					continue;
 
-				if (_visitedNodes.FirstOrDefault(n => n.City.Equals(nextCity)) != null)
+				var nextCity = _routeService.GetCity(nextCityName);
+				if (!nextCity.Valid)
 					continue;
 
 				ConnectionData connectionData;
