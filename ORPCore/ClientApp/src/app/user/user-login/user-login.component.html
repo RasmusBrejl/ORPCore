@@ -1,8 +1,8 @@
-<input type="text" placeholder="Insert username" id="name" name="name" required
-       minlength="1" maxlength="10" size="50">
+<input [value]="user.name" type="text" placeholder="Insert username" id="name" name="name" required
+       minlength="1" maxlength="10" size="50" (input)="user.name = $event.target.value">
        
-<input type="password" placeholder="Insert password" id="password" name="password" required
-    minlength="1" maxlength="10" size="50">
+<input [value]="user.password" type="password" placeholder="Insert password" id="password" name="password" required
+    minlength="1" maxlength="10" size="50" (input)="user.password">
     
     <p>Insert your login details</p>
     <button (click)="login()">Login</button>
