@@ -1,1 +1,10 @@
-<h1>User</h1>
+<input type="text" placeholder="Insert username" id="name" name="name" required
+       minlength="1" maxlength="10" size="50">
+       
+<input type="password" placeholder="Insert password" id="password" name="password" required
+    minlength="1" maxlength="10" size="50">
+    
+    <p>Insert your login details</p>
+    <button (click)="login()">Login</button>
+
+<p *ngIf="loginfailed">Couldn't find the user<p>
