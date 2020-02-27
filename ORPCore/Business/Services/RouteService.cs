@@ -3,6 +3,7 @@ using ORP.Business.Repositories;
 using ORP.Models;
 using ORP.Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -34,7 +35,7 @@ namespace ORP.Business.Services
 		{
 			if (parcel.ParcelTypes != null)
 			{
-				var parcelTypes = parcel.ParcelTypes;
+				var parcelTypes = parcel.ParcelTypes.Select(x=>(ParcelType)x);
 				if (parcelTypes.Any(Settings.InvalidParcelTypes.Contains))
 				{
 					errorMessage = Settings.PackageInvalidTypeMessage;
@@ -91,7 +92,7 @@ namespace ORP.Business.Services
 			var totalPrice = basePrice;
 			if (parcel.ParcelTypes != null)
 			{
-				totalPrice += parcel.ParcelTypes.Sum(parcelCategory => basePrice * parcelCategory.ToPriceModifier());
+				totalPrice += parcel.ParcelTypes.Sum(parcelCategory => basePrice * ((ParcelType) parcelCategory).ToPriceModifier());
 			}
 
 			errorMessage = string.Empty;
