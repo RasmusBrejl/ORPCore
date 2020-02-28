@@ -22,21 +22,12 @@ namespace ORPCore.Controllers
         }
 
         [HttpGet]
+        [Route("CalculateRoute")]
         public List<Order> CalculateRoute(string city1, string city2, [FromBody] Parcel parcel)
         {
             var cityOne = _routeService.GetCity(city1);
             var cityTwo = _routeService.GetCity(city2);
             return new RoutePlannerGraph(cityOne, cityTwo, _routeService, parcel).ComputeRoutes();
-        }
-
-        [HttpGet]
-        public ConnectionData Index()
-        {
-            return new ConnectionData
-            {
-                Price = 10,
-                Duration = 40
-            };
         }
 
         // Respond request
@@ -51,11 +42,7 @@ namespace ORPCore.Controllers
             var connection = _routeService.GetConnection(request.city_from, request.city_to);
             if (connection == null)
             {
-                return new ConnectionData
-                {
-                    Duration = 10,
-                    Price = 20
-                };
+	            return null;
             }
 
             if (!connection.ConnectionType.Equals(ConnectionType.Plane))
