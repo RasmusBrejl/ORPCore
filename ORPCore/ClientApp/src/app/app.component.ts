@@ -7,14 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'ORB';
-
-  public showRoutePlanner: boolean = false;
-  public showLogin: boolean = true;
-
-  @Input() showLogin: boolean;
-
-  public login() {
-    this.showLogin = false;
-  }
-
 }
