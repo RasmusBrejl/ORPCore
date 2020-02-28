@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ORB';
+
+  public showRoutePlanner: boolean = false;
+  public showLogin: boolean = true;
+
+  @Input() showLogin: boolean;
+
+  public login() {
+    this.showLogin = false;
+  }
+
 }

@@ -8,9 +8,12 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'user-login.component.html',
   styleUrls: ['user-login.component.css']
 })
+
 export class UserLoginComponent {
 
  //private userService: UserService;
+
+ 
 
  public constructor(private userService: UserService) {
     
@@ -24,6 +27,7 @@ public playerName: any;
   public ngOnInit() {
     this.user = new User();
     this.user.name = "1";
+    this.user.password = "2";
   }
 
   public login(){
@@ -36,7 +40,8 @@ public playerName: any;
     //   this.loginfailed = true;
     // }
   }
-  public onKey(event: any) { // without type info
-    console.log(event);
+  public onKeyName(event: any) { // without type info
+    this.user.name = event.key;
+    console.log(this.user.name);
   }
 }

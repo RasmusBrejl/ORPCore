@@ -1,7 +1,7 @@
-<input type="text" placeholder="Insert username" id="name" name="name" (keyup)="onKey($event)" [(ngModel)]="playerName" required
+<input type="text" placeholder="Insert username" id="name" name="name" value = {{user.name}} required
        minlength="1" maxlength="10" size="50">
        
-<input type="password" placeholder="Insert password" id="password" value="user.password" name="password" required
+<input type="password" placeholder="Insert password" id="password" name="password" required
     minlength="1" maxlength="10" size="50">
     
     <p>Insert your login details</p>

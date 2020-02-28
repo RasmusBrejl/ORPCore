@@ -1,0 +1,21 @@
+<h2>Parcel Details</h2>
+
+<p>Insert the parcel weight below</p>
+<input type="text" [value]="weight" placeholder="weight">
+<p>Insert the given dimensions below</p>
+<input type="text" [value]="height" placeholder="height"> <input type="text" [value]="width" placeholder="width"> <input type="text" [value]="depth" placeholder="depth">
+
+<p>Insert a start destination</p>
+
+  <select formControlName="countryControl">
+    <option [value]="destination" *ngFor="let destination of destinations"> {{destination}}</option>
+  </select>
+
+
+  <p>Insert an end destination</p>
+
+  <select formControlName="countryControl">
+    <option [value]="destination" *ngFor="let destination of destinations"> {{destination}}</option>
+  </select>
+
+  <button *ngIf = "weight.length > 0 && height.length > 0" >Click</button>

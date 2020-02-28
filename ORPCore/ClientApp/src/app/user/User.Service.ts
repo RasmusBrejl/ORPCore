@@ -11,12 +11,14 @@ import { User } from './user';
 
 export class UserService {
 
-endpoint: string = 'http://localhost:4002/user/';
+endpoint: string = 'https://wa-oapl.azurewebsites.net/RequestRoute';
+httpOptions: any;
 
 constructor(private http: HttpClient, ) { 
     const httpOptions = {
     headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*'
   })
 };
 }
@@ -27,13 +29,13 @@ private extractData(res: Response) {
   }
 
   tryLogIn(user: User): Observable<any> {
-    console.log(user);
-    var requestRoute = this.endpoint + "?Username=" + user.name + "&Password=" + user.password;
-    return this.http.get(requestRoute).pipe(
+    // var requestRoute = this.endpoint + "?username=" + user.name + "&password=" + user.password;
+    // console.log(requestRoute);
+    this.http.get<any>(this.endpoint).subscribe(data => {
+    console.log(data);
+})
+    var response = this.http.get(this.endpoint).pipe(
       map(this.extractData));
-  }
-
-  public changeName(event) {
-    console.log(event);
+    return response;
   }
 }
