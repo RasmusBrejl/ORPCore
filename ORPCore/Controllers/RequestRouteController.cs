@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
-using ORP.Models;
-using ORP.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using ORP.Business.Repositories;
+using ORP.Models;
+using ORP.Models.Enums;
 using ORPCore.Business;
 using ORPCore.Business.Repositories;
 using ORPCore.Business.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 
 namespace ORP.Controllers
 {
-    public class RequestRouteController : Controller
+    [ApiController]
+    [Route("RequestRoute")]
+	public class RequestRouteController : Controller
     {
         private readonly RouteService _routeService;
 
@@ -37,16 +41,16 @@ namespace ORP.Controllers
         }
 
         // Respond request
+        [HttpGet]
         public ConnectionData GetConnectionData([FromBody] RequestRouteObject request)
         {
-
             if (request is null)
             {
                 return null;
             }
 
-            Connection RouteConnection = _routeService.GetConnection(request.city_from, request.city_to);
-            if (RouteConnection == null)
+            var connection = _routeService.GetConnection(request.city_from, request.city_to);
+            if (connection == null)
             {
                 return new ConnectionData
                 {
@@ -55,19 +59,34 @@ namespace ORP.Controllers
                 };
             }
 
-            if (RouteConnection.ConnectionType.Equals(ConnectionType.Plane))
+            if (!connection.ConnectionType.Equals(ConnectionType.Plane))
             {
-                return _routeService.GetConnectionData(new Parcel
-                {
-                    Weight = request.weight,
-                    Width = request.width,
-                    Height = request.height,
-                    Length = request.length
-
-                }, out var msg);
+                return null;
             }
 
-            return null;
+            var parcelTypes = new List<ParcelType>();
+            if (request.animals) parcelTypes.Add(ParcelType.LiveAnimals);
+            if (request.weapons) parcelTypes.Add(ParcelType.Weapons);
+            if (request.fragile) parcelTypes.Add(ParcelType.CautiousParcels);
+            if (request.recommended_delivery) parcelTypes.Add(ParcelType.Recommended);
+            if (request.cold) parcelTypes.Add(ParcelType.RefrigeratedGoods);
+
+            var parcel = new Parcel()
+            {
+                Width = request.width,
+                Height = request.height,
+                Length = request.length,
+                Weight = request.weight,
+                ParcelTypes = parcelTypes.Select(x => (int)x).ToList()
+            };
+
+            var connectionData = _routeService.GetConnectionData(parcel, out string errorMessage);
+            if (connectionData == null)
+            {
+                throw new HttpRequestException(errorMessage);
+            }
+
+            return connectionData;
         }
     }
 }

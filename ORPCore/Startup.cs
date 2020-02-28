@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +6,12 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ORP.Business.Repositories;
+using ORP.Models;
+using ORPCore.Business;
+using ORPCore.Business.Repositories;
+using ORPCore.Business.Services;
+using ORPCore.Models;
 
 namespace ORPCore
 {
@@ -13,6 +20,16 @@ namespace ORPCore
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			var parcel = new Parcel()
+			{
+				Width = 10f,
+				Height = 10f,
+				Length = 10f,
+				ParcelTypes = new List<int>(),
+				Weight = 2f
+			};
+			var routePlanner = new RoutePlannerGraph(new City() {Name = "kapstaden", Valid = true}, new City(){Name = "kap_st_marie", Valid = true}, new RouteService(new ConnectionRepository(), new CityRepository()), parcel);
+			var routes = routePlanner.ComputeRoutes();
 		}
 
 		public IConfiguration Configuration { get; }
