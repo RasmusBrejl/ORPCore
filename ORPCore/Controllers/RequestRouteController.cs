@@ -8,18 +8,23 @@ using ORPCore.Business.Services;
 using ORPCore.Models;
 using ORPCore.Models.Enums;
 
+
+
 namespace ORPCore.Controllers
 {
     [ApiController]
     [Route("RequestRoute")]
-	public class RequestRouteController : Controller
+    public class RequestRouteController : Controller
     {
         private readonly RouteService _routeService;
+
+
 
         public RequestRouteController()
         {
             _routeService = new RouteService(new ConnectionRepository(), new CityRepository());
         }
+
 
 
         [HttpGet]
@@ -31,6 +36,8 @@ namespace ORPCore.Controllers
             return new RoutePlannerGraph(cityOne, cityTwo, _routeService, parcel).ComputeRoutes();
         }
 
+
+
         // Respond request
         [HttpGet]
         public ConnectionData GetConnectionData([FromBody] RequestRouteObject request)
@@ -40,16 +47,26 @@ namespace ORPCore.Controllers
                 return null;
             }
 
+
+
             var connection = _routeService.GetConnection(request.city_from, request.city_to);
             if (connection == null)
             {
-	            return null;
+                return new ConnectionData
+                {
+                    Duration = 10,
+                    Price = 20
+                };
             }
+
+
 
             if (!connection.ConnectionType.Equals(ConnectionType.Plane))
             {
                 return null;
             }
+
+
 
             var parcelTypes = new List<ParcelType>();
             if (request.animals) parcelTypes.Add(ParcelType.LiveAnimals);
@@ -57,6 +74,8 @@ namespace ORPCore.Controllers
             if (request.fragile) parcelTypes.Add(ParcelType.CautiousParcels);
             if (request.recommended_delivery) parcelTypes.Add(ParcelType.Recommended);
             if (request.cold) parcelTypes.Add(ParcelType.RefrigeratedGoods);
+
+
 
             var parcel = new Parcel()
             {
@@ -67,11 +86,15 @@ namespace ORPCore.Controllers
                 ParcelTypes = parcelTypes.Select(x => (int)x).ToList()
             };
 
+
+
             var connectionData = _routeService.GetConnectionData(parcel, out string errorMessage);
             if (connectionData == null)
             {
                 throw new HttpRequestException(errorMessage);
             }
+
+
 
             return connectionData;
         }
