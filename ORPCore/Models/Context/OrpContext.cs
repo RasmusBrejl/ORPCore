@@ -16,6 +16,8 @@ namespace ORP.Models.Context
 
         public DbSet<Parcel> Parcels { get; set; }
 
+        public DbSet<DiscountCode> DiscountCodes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
