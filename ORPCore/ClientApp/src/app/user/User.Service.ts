@@ -39,7 +39,7 @@ export class UserService {
   }
 
   calculate(parcel: Parcel, start: string, end: string): Promise<any> {
-    parcel.type[0] = 1;
+    end = 'dakar'
      return this.http.post('https://wa-oapl.azurewebsites.net/requestroute/calculateroute?city1='+start+'&city2='+end, parcel).toPromise()
       .catch(res => console.log(res))
   }

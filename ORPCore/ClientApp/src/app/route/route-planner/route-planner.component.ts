@@ -45,8 +45,8 @@ export class RoutePlannerComponent {
     this.width = "";
     this.depth = "";
     this.destinations = new Array<string>();
-    this.destinations.push("Whale City", "Congo", "Africa");
-    this.userService.getCities().then(res => res = this.cities)
+    // this.destinations.push("Whale City", "Congo", "Africa");
+    this.userService.getCities().then(res => this.cities = res)
 
     this.destination = this.destinations[0];
     this.endDestination = this.destinations[0];
