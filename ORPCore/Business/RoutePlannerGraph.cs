@@ -36,7 +36,9 @@ namespace ORPCore.Business
 
 		public List<Order> ComputeRoutes()
 		{
-			// TODO: Add functionality and return fastest + cheapest route
+			if (!_cityFrom.Valid || !_cityTo.Valid)
+				return new List<Order>();
+
 			var orders = new List<Order>();
 			var fastestRoute = ComputeRoute(RoutePriorityType.Fastest);
 			var cheapestRoute = ComputeRoute(RoutePriorityType.Cheapest);
@@ -54,7 +56,9 @@ namespace ORPCore.Business
 
 			foreach (var connection in connections)
 			{
-				var nextCityName = connection.CityOne == currentNode.City.Name ? connection.CityTwo : connection.CityOne;
+				var nextCityName = connection.CityOne == currentNode.City.Name
+					? connection.CityTwo
+					: connection.CityOne;
 				if (_visitedNodes.FirstOrDefault(n => n.City.Name.Equals(nextCityName)) != null)
 					continue;
 
@@ -81,20 +85,26 @@ namespace ORPCore.Business
 
 				var nextNodeCost = currentNode.ConnectionData.Add(connectionData);
 
-				var node = _openNodes.FirstOrDefault(n => n.City.Equals(nextCity));
+				var node = _openNodes.FirstOrDefault(n => n.City.Name.Equals(nextCityName));
 				if (node == null)
 				{
 					_openNodes.Add(new GraphNode(nextCity, currentNode, nextNodeCost));
 				}
 				else
 				{
-					var nextNodeScaledPrice = nextNodeCost.Price + node.ExtraCost.Sum(x => x * nextNodeCost.Price);
-					if ((routePriorityType == RoutePriorityType.Cheapest && node.ScaledPrice > nextNodeScaledPrice)
-					    || node.ConnectionData.Duration > nextNodeCost.Duration)
+					var nextNodePriceScaled = nextNodeCost.Price;
+					if (node.ExtraCost != null && node.ExtraCost.Count > 0)
+					{
+						nextNodePriceScaled += node.ExtraCost.Sum(x => x * nextNodeCost.Price);
+					}
+
+					if ((routePriorityType == RoutePriorityType.Cheapest && node.ScaledPrice > nextNodePriceScaled)
+					    || (routePriorityType == RoutePriorityType.Fastest &&
+					        node.ConnectionData.Duration > nextNodeCost.Duration))
 					{
 						node.ConnectionData = nextNodeCost;
 						node.CameFrom = currentNode;
-						node.ScaledPrice = nextNodeScaledPrice;
+						node.ScaledPrice = nextNodePriceScaled;
 					}
 				}
 			}
@@ -111,13 +121,16 @@ namespace ORPCore.Business
 		private Order ComputeRoute(RoutePriorityType routePriorityType)
 		{
 			_visitedNodes = new List<GraphNode>();
-			_openNodes = new List<GraphNode> { _startNode };
+			_openNodes = new List<GraphNode> {_startNode};
 			_route = new List<GraphNode>();
 
 			while (_openNodes.Count > 0)
 			{
-				var currentNode = _openNodes.OrderBy(n => n.ConnectionData.Price).First();
-				if (currentNode.City.Equals(_cityTo))
+				var currentNode = routePriorityType == RoutePriorityType.Cheapest
+					? _openNodes.OrderBy(n => n.ConnectionData.Price).First()
+					: _openNodes.OrderBy(n => n.ConnectionData.Duration).First();
+
+				if (currentNode.City.Name.Equals(_cityTo.Name))
 				{
 					_endNode = currentNode;
 					GenerateRoute(currentNode);

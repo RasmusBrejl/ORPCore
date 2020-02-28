@@ -17,10 +17,17 @@ namespace ORPCore.Models
 			CameFrom = cameFrom;
 			City = city;
 			ConnectionData = connectionData;
-			ExtraCost = cameFrom?.ExtraCost;
-			if (city.PricePenalty > 0)
-				ExtraCost.Add(city.PricePenalty);
+			SetupExtraCost();
 			ScaledPrice = connectionData.Price + (ExtraCost?.Sum(x => x * connectionData.Price) ?? 0);
+		}
+
+		private void SetupExtraCost()
+		{
+			ExtraCost = new List<float>();
+			if (CameFrom != null && CameFrom.ExtraCost.Count > 0)
+				ExtraCost.AddRange(CameFrom.ExtraCost);
+			if (City.PricePenalty > 0)
+				ExtraCost.Add(City.PricePenalty);
 		}
 	}
 }

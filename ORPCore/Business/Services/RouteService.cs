@@ -119,7 +119,7 @@ namespace ORPCore.Business.Services
 		{
 			return new ConnectionData()
 			{
-				Duration = 20f,
+				Duration = 50f,
 				Price = 10f
 			};
 		}
@@ -128,7 +128,7 @@ namespace ORPCore.Business.Services
 		{
 			return new ConnectionData()
 			{
-				Duration = 10f,
+				Duration = 25f,
 				Price = 20f
 			};
 		}
