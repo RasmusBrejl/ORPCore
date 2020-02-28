@@ -9,9 +9,8 @@ namespace ORPCore.Business.Extensions
 			return new ConnectionData()
 			{
 				Duration = original.Duration + other.Duration,
-				Price = original.Price + other.Price,
-				Date = original.Date
-			};
+				Price = original.Price + other.Price
+            };
 		}
 	}
 }
