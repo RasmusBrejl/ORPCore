@@ -15,8 +15,6 @@ export class UserLoginComponent {
 
  //private userService: UserService;
 
- 
-
  public constructor(private userService: UserService) {
     
  }
