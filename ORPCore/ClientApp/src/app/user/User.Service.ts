@@ -9,7 +9,7 @@ import { User } from './user';
 })
 export class UserService {
 
-endpoint: string = 'https://wa-oapl.azurewebsites.net/';
+endpoint: string = 'https://wa-oapl.azurewebsites.net/user/getuser/';
 
 constructor(private http: HttpClient, ) { 
     const httpOptions = {
@@ -20,13 +20,16 @@ constructor(private http: HttpClient, ) {
 }
 
 private extractData(res: Response) {
+  console.log(res)
     let body = res;
     return body || { };
   }
 
   tryLogIn(user: User): Observable<any> {
     console.log(user)
-    return this.http.get(this.endpoint+'?username='+user.name+'&password='+user.password).pipe(
+    var endpoint = this.endpoint+'?username='+user.name+'&password='+user.password
+    console.log(endpoint)
+    return this.http.get(endpoint).pipe(
       map(this.extractData));
   }
 }

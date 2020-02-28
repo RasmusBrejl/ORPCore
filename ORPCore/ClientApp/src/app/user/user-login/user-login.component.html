@@ -6,11 +6,11 @@
     </div>
     <div align="center" style="margin-top:50px;">
         <input type="text" placeholder="Insert username" id="name" name="name" required
-    minlength="1" maxlength="10" size="50">
+    minlength="1" maxlength="10" size="50" [value]="user.name" (input)="user.name = $event.target.value">
     </div>
     <div align="center">
         <input type="password" placeholder="Insert password" id="password" name="password" required
-        minlength="1" maxlength="10" size="50">
+        minlength="1" maxlength="10" size="50" [value]="user.password" (input)="user.password = $event.target.value">
                 <p><b>Insert your login details</b></p>
         <button (click)="login()">Login</button>
 
