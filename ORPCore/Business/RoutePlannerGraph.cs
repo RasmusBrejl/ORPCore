@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ORP.Models;
-using ORP.Models.Enums;
 using ORPCore.Business.Extensions;
 using ORPCore.Business.Services;
 using ORPCore.Models;
@@ -70,10 +68,10 @@ namespace ORPCore.Business
 				switch (connection.ConnectionType)
 				{
 					case ConnectionType.Boat:
-						connectionData = _routeService.GetConnectionDataBoat(_parcel);
+						connectionData = _routeService.GetConnectionDataBoat(_parcel, _cityFrom, _cityTo);
 						break;
 					case ConnectionType.Car:
-						connectionData = _routeService.GetConnectionDataCar(_parcel);
+						connectionData = _routeService.GetConnectionDataCar(_parcel, _cityFrom, _cityTo);
 						break;
 					default:
 						connectionData = _routeService.GetConnectionData(_parcel, out string message);

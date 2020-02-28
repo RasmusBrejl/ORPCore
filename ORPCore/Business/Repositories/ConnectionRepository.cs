@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ORP.Models;
-using ORP.Models.Context;
 using ORPCore.Models;
+using ORPCore.Models.Context;
 
 namespace ORPCore.Business.Repositories
 {
@@ -12,7 +11,7 @@ namespace ORPCore.Business.Repositories
 		{
             using (var context = new OrpContext())
             {
-                return context.Connections.FirstOrDefault(x => x.CityOne == cityFrom.Name && x.CityTwo == cityTo.Name);
+                return context.Connections.FirstOrDefault(x => (x.CityOne == cityFrom.Name && x.CityTwo == cityTo.Name) || (x.CityTwo == cityFrom.Name && x.CityOne == cityTo.Name));
             }
 		}
 

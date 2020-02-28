@@ -1,4 +1,4 @@
-﻿using ORP.Models;
+﻿using ORPCore.Models;
 
 namespace ORPCore.Business.Extensions
 {

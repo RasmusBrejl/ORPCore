@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using ORP.Business.Repositories;
-using ORP.Models;
+using ORPCore.Business.Repositories;
+using ORPCore.Models;
 
-namespace ORP.Business.Services
+namespace ORPCore.Business.Services
 {
     public class OrderService
     {

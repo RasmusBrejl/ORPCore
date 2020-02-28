@@ -1,7 +1,7 @@
-﻿using ORP.Models;
-using ORP.Models.Context;
+﻿using ORPCore.Models;
+using ORPCore.Models.Context;
 
-namespace ORP.Business.Repositories
+namespace ORPCore.Business.Repositories
 {
     public class TestRepository
     {

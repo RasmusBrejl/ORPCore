@@ -1,7 +1,6 @@
-﻿using ORP.Models.Enums;
-using ORPCore.Models;
+﻿using ORPCore.Models.Enums;
 
-namespace ORP.Models
+namespace ORPCore.Models
 {
 	public class Connection
 	{

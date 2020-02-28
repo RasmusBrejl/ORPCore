@@ -1,7 +1,7 @@
-﻿using ORP.Models;
-using ORP.Models.Enums;
+﻿using ORPCore.Models;
+using ORPCore.Models.Enums;
 
-namespace ORP.Business.Extensions
+namespace ORPCore.Business.Extensions
 {
 	public static class ParcelExtensions
 	{

@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ORP.Business.Repositories;
-using ORP.Models;
 using ORPCore.Business;
 using ORPCore.Business.Repositories;
 using ORPCore.Business.Services;
 using System.Collections.Generic;
 using System.Linq;
+using ORPCore.Models;
 
 namespace ORPCore.Tests.Business
 {
@@ -69,7 +68,7 @@ namespace ORPCore.Tests.Business
 
 			// Assert
 			Assert.AreEqual(2, result.Count);
-			Assert.AreEqual(260, result.First().Price);
+			Assert.AreEqual(250, result.First().Price);
 			Assert.AreEqual(49, result.First().Duration);
 			Assert.AreEqual(50, result.Last().Price);
 			Assert.AreEqual(250, result.Last().Duration);
