@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../User.Service';
 import { HttpClient } from '@angular/common/http';
+import { Handler } from '../../viewHandler';
+
 
 @Component({
   selector: 'user-login-component',
@@ -31,17 +33,14 @@ public playerName: any;
   }
 
   public login(){
-    console.log(this.user);
-    console.log(this.playerName);
-    this.loginfailed = !this.loginfailed;
-    var userLogin = this.userService.tryLogIn(this.user);
-    console.log(userLogin);
-    // if(!userLogin) {
-    //   this.loginfailed = true;
-    // }
-  }
-  public onKeyName(event: any) { // without type info
-    this.user.name = event.key;
-    console.log(this.user.name);
+    var isLoggedin = false
+    var userLogin = this.userService.tryLogIn(this.user).then(res => {
+      if (res) {
+        Handler.isLoggedIn = true
+      }
+    });
+    if(!userLogin) {
+      this.loginfailed = true;
+    }
   }
 }

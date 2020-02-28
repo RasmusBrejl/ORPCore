@@ -18,6 +18,16 @@ namespace ORP.Controllers
             _routeService = new RouteService(new ConnectionRepository(), new CityRepository());
         }
 
+        [HttpGet]
+        public ConnectionData Index()
+        {
+            return new ConnectionData
+            {
+                Price = 10,
+                Duration =  40
+            };
+        }
+
         // Respond request
         public ConnectionData GetConnectionData([FromBody] RequestRouteObject request)
         {
@@ -32,7 +42,6 @@ namespace ORP.Controllers
             {
                 return new ConnectionData
                 {
-                    Date = DateTime.UtcNow.ToString(),
                     Duration = 10,
                     Price = 20
                 };

@@ -5,6 +5,6 @@
 
   <!-- [...] -->
 </div>
-<user-login-component></user-login-component>
-<!-- <route-planner-component></route-planner-component> -->
+<user-login-component *ngIf="!handler.isLoggedIn"></user-login-component>
+
 <router-outlet></router-outlet>
