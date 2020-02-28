@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 //import { RouteService } from '../Route.Service';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/user/User.Service';
+import { Parcel } from './parcel';
 
 @Component({
   selector: 'route-planner-component',
@@ -9,6 +11,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RoutePlannerComponent {
 
+  public constructor (private userService: UserService) {
+
+  }
+  public parcel: Parcel
   public destinations: Array<string>;
   public destination: string;
   public weight: string;
@@ -17,7 +23,7 @@ export class RoutePlannerComponent {
   public width: string;
 
   public ngOnInit() {
-
+    this.parcel = new Parcel
     this.weight = "";
     this.height = "";
     this.width = "";
@@ -26,10 +32,4 @@ export class RoutePlannerComponent {
     this.destinations.push("Whale City", "Congo", "Africa");
 
   }
-
-  //private userService: UserService;
-
-  //  public constructor(private routeService: RouteService) {
-
-  //  }
 }

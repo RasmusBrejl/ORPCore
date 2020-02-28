@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { User } from './user';
+import { Parcel } from '../route/route-planner/parcel';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +30,11 @@ export class UserService {
 
     return this.http.get(this.endpoint + '?username=' + user.name + '&password=' + user.password).toPromise()
       .catch(res => console.log(res))
-    //.pipe(
-    //map(this.extractData));
   }
+
+  calculate(parcel: Parcel, start: string, end: string): Promise<any> {
+     return this.http.get('https://wa-oapl.azurewebsites.net/requestroute/calculateroute?city1='+start+'&city2='+end).toPromise()
+      .catch(res => console.log(res))
+  }
+
 }
