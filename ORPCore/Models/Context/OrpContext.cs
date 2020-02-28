@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ORPCore.Models;
 
-namespace ORP.Models.Context
+namespace ORPCore.Models.Context
 {
     public class OrpContext : DbContext
     {

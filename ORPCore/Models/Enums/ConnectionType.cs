@@ -1,4 +1,4 @@
-﻿namespace ORP.Models.Enums
+﻿namespace ORPCore.Models.Enums
 {
 	public enum ConnectionType
 	{

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Web;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ORP.Buisness.Services;
-using ORP.Business.Repositories;
-using ORP.Business.Services;
-using ORP.Models;
+using ORPCore.Business.Repositories;
+using ORPCore.Business.Services;
+using ORPCore.Models;
 
-namespace ORP.Controllers
+namespace ORPCore.Controllers
 {
     public class OrderController : Controller
     {

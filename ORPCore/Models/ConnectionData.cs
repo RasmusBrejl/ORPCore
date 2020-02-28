@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ORP.Models
+﻿namespace ORPCore.Models
 {
 	public class ConnectionData
 	{

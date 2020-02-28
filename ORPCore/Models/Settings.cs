@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using ORP.Models.Enums;
+﻿using ORPCore.Models.Enums;
 
-namespace ORP.Models
+namespace ORPCore.Models
 {
     public static class Settings
     {

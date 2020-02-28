@@ -1,11 +1,8 @@
-﻿using ORP.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ORP.Business.Repositories;
+﻿using System;
+using ORPCore.Business.Repositories;
+using ORPCore.Models;
 
-namespace ORP.Buisness.Services
+namespace ORPCore.Business.Services
 {
     public class UserService
     {

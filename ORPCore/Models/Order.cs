@@ -1,7 +1,6 @@
 ﻿using System;
-using ORPCore.Models;
 
-namespace ORP.Models
+namespace ORPCore.Models
 {
 	public class Order
 	{

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ORP.Business.Extensions;
-using ORP.Models;
-using ORP.Models.Enums;
+using ORPCore.Business.Extensions;
+using ORPCore.Models;
+using ORPCore.Models.Enums;
 
 namespace ORPCore.Tests.Business.Extensions
 {

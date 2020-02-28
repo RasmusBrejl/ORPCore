@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Security.Permissions;
 using Newtonsoft.Json;
 
-namespace ORP.Models
+namespace ORPCore.Models
 {
 	public class RequestRouteObject
 	{

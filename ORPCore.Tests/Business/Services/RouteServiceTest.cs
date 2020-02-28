@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ORP.Business.Repositories;
-using ORP.Models;
-using ORP.Models.Enums;
 using ORPCore.Business.Repositories;
 using ORPCore.Business.Services;
 using System.Collections.Generic;
+using ORPCore.Models;
+using ORPCore.Models.Enums;
 
 namespace ORPCore.Tests.Business.Services
 {
