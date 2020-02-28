@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ORP.Business.Extensions;
 using ORP.Business.Repositories;
 using ORP.Models;
@@ -17,7 +18,6 @@ namespace ORPCore.Business.Services
 	{
 		private readonly ConnectionRepository _connectionRepository;
 		private readonly CityRepository _cityRepository;
-		private static HttpClient client = new HttpClient();
 
 		public RouteService(ConnectionRepository connectionRepository, CityRepository cityRepository)
 		{
@@ -115,39 +115,89 @@ namespace ORPCore.Business.Services
 			return _connectionRepository.GetConnections(city);
 		}
 
-		public ConnectionData GetConnectionDataBoat(Parcel parcel)
+		public ConnectionData GetConnectionDataBoat(Parcel parcel, City cityFrom, City cityTo)
 		{
-			return new ConnectionData()
+			var routeObject = new RequestRouteObject()
 			{
-				Duration = 50f,
-				Price = 10f
+				city_from = cityFrom.Name,
+				city_to = cityTo.Name,
+				weight = parcel.Weight,
+				width = parcel.Width,
+				height = parcel.Height,
+				length = parcel.Length,
+				cold = parcel.ParcelTypes.Contains((int)ParcelType.RefrigeratedGoods),
+				fragile = parcel.ParcelTypes.Contains((int)ParcelType.CautiousParcels),
+				animals = parcel.ParcelTypes.Contains((int)ParcelType.LiveAnimals),
+				weapons = parcel.ParcelTypes.Contains((int)ParcelType.Weapons),
+				recommended_delivery = parcel.ParcelTypes.Contains((int)ParcelType.Recommended),
+				date = DateTime.UtcNow
 			};
+			try
+			{
+				return GetConnectionDataFromRouteRequest(routeObject, ConnectionType.Boat).Result;
+			}
+			catch
+			{
+				return new ConnectionData()
+				{
+					Duration = 50,
+					Price = 10
+				};
+			}
 		}
 
-		public ConnectionData GetConnectionDataCar(Parcel parcel)
+		public ConnectionData GetConnectionDataCar(Parcel parcel, City cityFrom, City cityTo)
 		{
-			return new ConnectionData()
+			var routeObject = new RequestRouteObject()
 			{
-				Duration = 25f,
-				Price = 20f
+				city_from = cityFrom.Name,
+				city_to = cityTo.Name,
+				weight = parcel.Weight,
+				width = parcel.Width,
+				height = parcel.Height,
+				length = parcel.Length,
+				cold = parcel.ParcelTypes.Contains((int)ParcelType.RefrigeratedGoods),
+				fragile = parcel.ParcelTypes.Contains((int)ParcelType.CautiousParcels),
+				animals = parcel.ParcelTypes.Contains((int)ParcelType.LiveAnimals),
+				weapons = parcel.ParcelTypes.Contains((int)ParcelType.Weapons),
+				recommended_delivery = parcel.ParcelTypes.Contains((int)ParcelType.Recommended),
+				date = DateTime.UtcNow
 			};
+
+			try
+			{
+				return GetConnectionDataFromRouteRequest(routeObject, ConnectionType.Car).Result;
+			}
+			catch
+			{
+				return new ConnectionData()
+				{
+					Duration = 50,
+					Price = 10
+				};
+			}
 		}
 
 		// Sent request
-		public async Task<ConnectionData> GetConnectionDataFromRouteRequest(string url) 
+		public async Task<ConnectionData> GetConnectionDataFromRouteRequest(RequestRouteObject routeObject, ConnectionType connectionType)
 		{
-			ConnectionData connectionData = null;
-			client.BaseAddress = new Uri("base");
-			client.DefaultRequestHeaders.Accept.Clear();
-			client.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("application/json"));
+			using var client = new HttpClient();
+			var baseUrl = connectionType == ConnectionType.Boat
+				? "http://wa-eitpl.azurewebsites.net/RequestRoute"
+				: "http://wa-tlpl.azurewebsites.net/RequestRoute";
 
-			HttpResponseMessage response = await client.GetAsync(url);
-			//if (response.IsSuccessStatusCode)
-			//{
-			//	connectionData = await response.Content.ReadAsAsync<ConnectionData>();
-			//}
-			return connectionData;
+			var request = new HttpRequestMessage
+			{
+				Method = HttpMethod.Get,
+				RequestUri = new Uri(baseUrl),
+				Content = new StringContent(JsonConvert.SerializeObject(routeObject), Encoding.UTF8)
+			};
+
+			var response = await client.SendAsync(request).ConfigureAwait(false);
+			response.EnsureSuccessStatusCode();
+
+			var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+			return JsonConvert.DeserializeObject<ConnectionData>(responseBody);
 		}
 	}
 }
