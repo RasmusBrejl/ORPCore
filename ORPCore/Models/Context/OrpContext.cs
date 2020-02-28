@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ORPCore.Models;
 
 namespace ORP.Models.Context
 {

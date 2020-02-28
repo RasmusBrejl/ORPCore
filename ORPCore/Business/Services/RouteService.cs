@@ -1,15 +1,17 @@
-﻿using ORP.Business.Extensions;
-using ORP.Business.Repositories;
-using ORP.Models;
-using ORP.Models.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using ORP.Business.Extensions;
+using ORP.Business.Repositories;
+using ORP.Models;
+using ORP.Models.Enums;
+using ORPCore.Business.Repositories;
+using ORPCore.Models;
 
-namespace ORP.Business.Services
+namespace ORPCore.Business.Services
 {
 	public class RouteService
 	{
@@ -25,10 +27,15 @@ namespace ORP.Business.Services
 
 		public Connection GetConnection(string cityFromName, string cityToName)
 		{
-			var cityFrom = _cityRepository.GetCity(cityFromName);
-			var cityTo = _cityRepository.GetCity(cityToName);
+			var cityFrom = GetCity(cityFromName);
+			var cityTo = GetCity(cityToName);
 
 			return _connectionRepository.GetConnection(cityFrom, cityTo);
+		}
+
+		public City GetCity(string cityName)
+		{
+			return _cityRepository.GetCity(cityName);
 		}
 
 		public ConnectionData GetConnectionData(Parcel parcel, out string errorMessage)
@@ -100,6 +107,29 @@ namespace ORP.Business.Services
 			{
 				Duration = Settings.FlightDuration,
 				Price = totalPrice
+			};
+		}
+
+		public List<Connection> GetConnectionsForCity(City city)
+		{
+			return _connectionRepository.GetConnections(city);
+		}
+
+		public ConnectionData GetConnectionDataBoat(Parcel parcel)
+		{
+			return new ConnectionData()
+			{
+				Duration = 50f,
+				Price = 10f
+			};
+		}
+
+		public ConnectionData GetConnectionDataCar(Parcel parcel)
+		{
+			return new ConnectionData()
+			{
+				Duration = 25f,
+				Price = 20f
 			};
 		}
 

@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ORP.Models;
 using ORP.Models.Context;
+using ORPCore.Models;
 
-namespace ORP.Business.Repositories
+namespace ORPCore.Business.Repositories
 {
 	public class ConnectionRepository
 	{
@@ -12,6 +14,14 @@ namespace ORP.Business.Repositories
             {
                 return context.Connections.FirstOrDefault(x => x.CityOne == cityFrom.Name && x.CityTwo == cityTo.Name);
             }
+		}
+
+		public List<Connection> GetConnections(City city)
+		{
+			using (var context = new OrpContext())
+			{
+				return context.Connections.Where(c => c.CityOne == city.Name || c.CityTwo == city.Name).ToList();
+			}
 		}
 	}
 }

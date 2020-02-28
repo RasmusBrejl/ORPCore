@@ -1,4 +1,5 @@
 ﻿using ORP.Models.Enums;
+using ORPCore.Models;
 
 namespace ORP.Models
 {
