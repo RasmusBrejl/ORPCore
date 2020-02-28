@@ -11,6 +11,11 @@ namespace ORP.Buisness.Services
     {
         private readonly UserRepository _userRepository;
 
+        public User GetUser(int userID)
+        {
+            return _userRepository.GetUser(userID);
+        }
+
         public UserService(UserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -23,7 +28,7 @@ namespace ORP.Buisness.Services
 
         public User TryLogIn(User user)
         {
-            return _userRepository.GetUser(user);
+            return _userRepository.LogIn(user);
         }
     }
 }
