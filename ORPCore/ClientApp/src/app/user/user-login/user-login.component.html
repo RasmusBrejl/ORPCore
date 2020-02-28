@@ -38,7 +38,7 @@
     <p>Insert your login details</p>
     <button (click)="login()">Login</button>
 
-    <p *ngIf="loginfailed">Couldn't find the user</p>
-    <p></p>
+    <p *ngIf="loginfailed">User name or password is wrong - Please try again</p>
+    <p *ngIf="noName">Please insert a name</p>
   </div>
 </div>

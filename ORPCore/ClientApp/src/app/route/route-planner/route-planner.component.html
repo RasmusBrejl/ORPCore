@@ -2,9 +2,10 @@
  
 <p>Insert the parcel weight below</p>
 <input type="text" [value]="parcel.weight" (input)="parcel.weight = $event.target.value" placeholder="weight">
+<p *ngIf="parcel.weight < 0">You can't have a parcel with a negative weight</p>
 <p>Insert the given dimensions below</p>
 <input type="text" [value]="parcel.height" placeholder="height" (input)="parcel.height = $event.target.value"> 
-<input type="text" [value]="parcel.width" placeholder="width" (input)="parcel.width = $event.target.value"> 
+<input type="text" [value]="parcel.width" placeholder="width" (input)="parcel.width = $event.target.value">
 <input type="text" [value]="parcel.depth" placeholder="depth" (input)="parcel.depth = $event.target.value">
  
 <form>

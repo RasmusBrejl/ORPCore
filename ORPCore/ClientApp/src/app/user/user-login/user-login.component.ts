@@ -15,6 +15,9 @@ export class UserLoginComponent {
 
  //private userService: UserService;
 
+ public noName: boolean;
+ public wrongUser: boolean;
+
  public constructor(private userService: UserService) {
     
  }
@@ -28,14 +31,25 @@ public playerName: any;
     this.user = new User();
     this.user.name = "";
     this.user.password = "";
+    this.noName = false;
   }
 
   public login(){
+    //this.noName = true;
+    if(!this.user.name) {
+      this.noName = true;
+    }
+    else {
+      this.noName = false;
+    }
     var isLoggedin = false
     var userLogin = this.userService.tryLogIn(this.user).then(res => {
       if (res) {
         Handler.userId = res.userId
         Handler.isLoggedIn = true
+      }
+      else {
+        this.loginfailed = true;
       }
     });
     if(!userLogin) {
