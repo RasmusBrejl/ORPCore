@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using ORP.Business.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using ORP.Buisness.Services;
-using ORP.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ORPCore.Business.Repositories;
+using ORPCore.Business.Services;
+using ORPCore.Models;
 
-namespace ORP.Controllers
+namespace ORPCore.Controllers
 {
 
     public class UserController : Controller

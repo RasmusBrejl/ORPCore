@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ORP.Models;
-using ORP.Models.Context;
 using ORPCore.Models;
+using ORPCore.Models.Context;
 
 namespace ORPCore.Business.Repositories
 {

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ORP.Models;
-using ORP.Models.Context;
+﻿using System.Linq;
 using ORPCore.Models;
+using ORPCore.Models.Context;
 
-namespace ORP.Business.Repositories
+namespace ORPCore.Business.Repositories
 {
 	public class DiscountRepository
 	{

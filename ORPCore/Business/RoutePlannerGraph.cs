@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ORP.Models;
-using ORP.Models.Enums;
 using ORPCore.Business.Extensions;
 using ORPCore.Business.Services;
 using ORPCore.Models;

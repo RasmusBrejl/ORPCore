@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using ORP.Models.Enums;
 
-namespace ORP.Models
+namespace ORPCore.Models
 {
 	public class Parcel
 	{
