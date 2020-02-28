@@ -1,26 +1,27 @@
 <h2>Parcel Details</h2>
-<div class="row">
-  <div class="col-6">
-    <p>Insert the parcel weight below</p>
-    <input type="text" [value]="weight" placeholder="weight">
-    <p>Insert the given dimensions below</p>
-    <input type="text" [value]="height" placeholder="height"> <input type="text" [value]="width" placeholder="width"> <input type="text" [value]="depth" placeholder="depth">    
-  </div>
-
-  <div class="col-6">
-    <p>Insert a start destination</p>
-
-  <select formControlName="countryControl">
-    <option [value]="destination" *ngFor="let destination of destinations"> {{destination}}</option>
-  </select>
-
-
-  <p>Insert an end destination</p>
-
-  <select formControlName="countryControl">
-    <option [value]="destination" *ngFor="let destination of destinations"> {{destination}}</option>
-  </select>
-
-  <button *ngIf = "weight.length > 0 && height.length > 0" >Click</button>
-  </div>
-</div>
+ 
+<p>Insert the parcel weight below</p>
+<input type="text" [value]="parcel.weight" (input)="parcel.weight = $event.target.value" placeholder="weight">
+<p>Insert the given dimensions below</p>
+<input type="text" [value]="parcel.height" placeholder="height" (input)="parcel.height = $event.target.value"> 
+<input type="text" [value]="parcel.width" placeholder="width" (input)="parcel.width = $event.target.value"> 
+<input type="text" [value]="parcel.depth" placeholder="depth" (input)="parcel.depth = $event.target.value">
+ 
+<form>
+ <div *ngFor="let type of types">
+ <input type="checkbox" (change)="isChangeLimitAccessToggle(type)" [checked]="type.checked"/> {{type.name}}
+ </div>
+ </form>
+<p>Insert a start destination</p>
+ 
+ <select formControlName="countryControl" (change)="onChangeStart($event.target.value)">
+ <option *ngFor="let destination of destinations" (input)="destination = $event.target.value" [value]="destination"> {{destination}}</option>
+ </select>
+ 
+ <p>Insert an end destination</p>
+ 
+ <select formControlName="countryControl" (change)="onChangeEnd($event.target.value)">
+ <option *ngFor="let destination of destinations" (input)="endDestination = $event.target.value" [value]="endDestination"> {{destination}}</option>
+ </select>
+ 
+ <button *ngIf = "parcel.weight && parcel.height && parcel.depth && parcel.width" (click)="calculate()" >Calculate</button>
