@@ -36,6 +36,7 @@ public playerName: any;
     var isLoggedin = false
     var userLogin = this.userService.tryLogIn(this.user).then(res => {
       if (res) {
+        Handler.userId = res.userId
         Handler.isLoggedIn = true
       }
     });

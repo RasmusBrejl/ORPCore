@@ -7,4 +7,6 @@
 </div>
 <user-login-component *ngIf="!handler.isLoggedIn"></user-login-component>
 
+<route-planner-component *ngIf="handler.isLoggedIn"></route-planner-component>
+
 <router-outlet></router-outlet>
