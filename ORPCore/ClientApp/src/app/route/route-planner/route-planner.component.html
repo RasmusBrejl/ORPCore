@@ -16,13 +16,13 @@
 <p>Insert a start destination</p>
  
  <select (change)="onChangeStart($event.target.value)" formControlName="countryControl">
- <option *ngFor="let destination of destinations" (input)="destination = $event.target.value" [value]="destination"> {{destination}}</option>
+ <option *ngFor="let city of cities" (input)="destination = $event.target.value" [value]="city.name"> {{destination}}</option>
  </select>
  
  <p>Insert an end destination</p>
  
- <select (change)="onChangeEnd($event.target.value)" formControlName="countryControl">
- <option *ngFor="let destination of destinations" (input)="endDestination = $event.target.value" [value]="destination"> {{destination}}</option>
- </select>
+ <select (change)="onChangeStart($event.target.value)" formControlName="countryControl">
+  <option *ngFor="let city of cities" (input)="endDestination = $event.target.value" [value]="city.name"> {{destination}}</option>
+  </select>
  
  <button *ngIf = "parcel.weight && parcel.height && parcel.depth && parcel.width" (click)="calculate()" >Calculate</button>

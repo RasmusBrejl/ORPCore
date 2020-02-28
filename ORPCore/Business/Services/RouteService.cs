@@ -36,6 +36,11 @@ namespace ORPCore.Business.Services
 			return _cityRepository.GetCity(cityName);
 		}
 
+        public List<City> GetAllCities()
+        {
+            return _cityRepository.GetAllCities();
+        }
+
 		public ConnectionData GetConnectionData(Parcel parcel, out string errorMessage)
 		{
 			if (parcel.ParcelTypes != null)
