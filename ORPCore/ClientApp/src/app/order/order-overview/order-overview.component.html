@@ -1,0 +1,22 @@
+<h2>Order Overview</h2>
+<body>
+<table class="blueTable">
+    <tbody>
+        <tr >
+            <th scope="col">Person</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Parcel Type</th>
+            <th scope="col">Source/Destination</th>
+            <th scope="col">Price</th>
+        </tr>
+
+        <tr *ngFor="let order of orders">
+            <td>{{order.person}}</td>
+            <td>{{order.orderId}}</td>
+            <td>{{order.parcelDetail}}</td>
+            <td>{{order.route}}</td>
+            <td>{{order.price}}</td>
+        </tr>
+    </tbody>
+</table>
+</body>
