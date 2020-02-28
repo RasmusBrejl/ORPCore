@@ -1,34 +1,31 @@
-﻿using ORP.Business.Repositories;
+﻿using System.Collections.Generic;
+using ORP.Business.Repositories;
 using ORP.Models;
 
 namespace ORP.Business.Services
 {
     public class OrderService
     {
-        private readonly TestRepository _orderRepository;
+        private readonly OrderRepository _orderRepository;
 
-        public OrderService(TestRepository orderRepository)
+        public OrderService(OrderRepository orderRepository)
         {
-            // TODO : Replace TestRepository with OrderRepository
             _orderRepository = orderRepository;
         }
 
-        public Order[] GetAllOrders(User user) 
+        public List<Order> GetAllOrders(User user)
         {
-            // TODO add getter
-            return new Order[1];
+            return _orderRepository.GetAllOrders(user);
         }
 
-        public bool AddOrder(Order order)
+        public bool AddOrder(Order order, User user)
         {
-            // TODO add setter
-            return true;
+            return _orderRepository.AddOrder(order, user);
         }
 
-        public Order GetOrder(int OrderId)
+        public Order GetOrder(int orderId)
         {
-            // TODO add getter
-            return new Order();
+            return _orderRepository.GetOrder(orderId);
         }
     }
 }

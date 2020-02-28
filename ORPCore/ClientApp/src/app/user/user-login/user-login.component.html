@@ -1,4 +1,4 @@
-<input type="text" placeholder="Insert username" id="name" name="name" value = {{user.name}} required
+<input type="text" placeholder="Insert username" id="name" name="name" required
        minlength="1" maxlength="10" size="50">
        
 <input type="password" placeholder="Insert password" id="password" name="password" required
@@ -7,4 +7,7 @@
     <p>Insert your login details</p>
     <button (click)="login()">Login</button>
 
-<p *ngIf="loginfailed">Couldn't find the user<p>
+        <p *ngIf="loginfailed">Couldn't find the user<p>                        
+    </div>
+    </div>
+</body>

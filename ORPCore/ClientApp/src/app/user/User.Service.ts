@@ -4,38 +4,32 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { User } from './user';
-
 @Injectable({
   providedIn: 'root'
 })
-
 export class UserService {
 
-endpoint: string = 'https://wa-oapl.azurewebsites.net/RequestRoute';
-httpOptions: any;
+endpoint: string = 'https://wa-oapl.azurewebsites.net/user/getuser/';
 
 constructor(private http: HttpClient, ) { 
     const httpOptions = {
     headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Content-Type':  'application/json'
   })
 };
 }
 
 private extractData(res: Response) {
+  console.log(res)
     let body = res;
     return body || { };
   }
 
   tryLogIn(user: User): Observable<any> {
-    // var requestRoute = this.endpoint + "?username=" + user.name + "&password=" + user.password;
-    // console.log(requestRoute);
-    this.http.get<any>(this.endpoint).subscribe(data => {
-    console.log(data);
-})
-    var response = this.http.get(this.endpoint).pipe(
+    console.log(user)
+    var endpoint = this.endpoint+'?username='+user.name+'&password='+user.password
+    console.log(endpoint)
+    return this.http.get(endpoint).pipe(
       map(this.extractData));
-    return response;
   }
 }
