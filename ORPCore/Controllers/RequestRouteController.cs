@@ -21,6 +21,7 @@ namespace ORPCore.Controllers
             _routeService = new RouteService(new ConnectionRepository(), new CityRepository());
         }
 
+
         [HttpGet]
         [Route("CalculateRoute")]
         public List<Order> CalculateRoute(string city1, string city2, [FromBody] Parcel parcel)

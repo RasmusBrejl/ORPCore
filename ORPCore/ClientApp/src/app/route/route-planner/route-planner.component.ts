@@ -30,6 +30,7 @@ export class RoutePlannerComponent {
 ];
   public negativeWeight: boolean;
 
+  public cities: any;
   public ngOnInit() {
 
     this.parcel = new Parcel();
@@ -43,9 +44,9 @@ export class RoutePlannerComponent {
     this.height = "";
     this.width = "";
     this.depth = "";
-    
     this.destinations = new Array<string>();
     this.destinations.push("Whale City", "Congo", "Africa");
+    this.userService.getCities().then(res => res = this.cities)
 
     this.destination = this.destinations[0];
     this.endDestination = this.destinations[0];

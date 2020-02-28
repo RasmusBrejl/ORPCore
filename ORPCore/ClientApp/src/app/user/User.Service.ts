@@ -32,8 +32,15 @@ export class UserService {
       .catch(res => console.log(res))
   }
 
+  getCities(): Promise<any> {
+    
+    return this.http.get('https://wa-oapl.azurewebsites.net/city/getallcities').toPromise()
+      .catch(res => console.log(res))
+  }
+
   calculate(parcel: Parcel, start: string, end: string): Promise<any> {
-     return this.http.get('https://wa-oapl.azurewebsites.net/requestroute/calculateroute?city1='+start+'&city2='+end).toPromise()
+    parcel.type[0] = 1;
+     return this.http.post('https://wa-oapl.azurewebsites.net/requestroute/calculateroute?city1='+start+'&city2='+end, parcel).toPromise()
       .catch(res => console.log(res))
   }
 

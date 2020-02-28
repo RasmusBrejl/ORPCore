@@ -4,6 +4,7 @@ export class Parcel {
     height: string;
     depth: string;
     width: string;
+    type: number[];
 
     constructor(user?: any) {
         if (user != null) {
