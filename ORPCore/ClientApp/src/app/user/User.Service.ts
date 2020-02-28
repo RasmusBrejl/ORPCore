@@ -20,16 +20,16 @@ constructor(private http: HttpClient, ) {
 }
 
 private extractData(res: Response) {
-  console.log(res)
     let body = res;
     return body || { };
   }
 
-  tryLogIn(user: User): Observable<any> {
+  tryLogIn(user: User): Promise<any> {
     console.log(user)
-    var endpoint = this.endpoint+'?username='+user.name+'&password='+user.password
-    console.log(endpoint)
-    return this.http.get(endpoint).pipe(
-      map(this.extractData));
+    
+    return this.http.get(this.endpoint+'?username='+user.name+'&password='+user.password).toPromise()
+      .catch(res => console.log(res))
+    //.pipe(
+      //map(this.extractData));
   }
 }

@@ -1,6 +1,7 @@
 ﻿using ORP.Models;
 using ORP.Models.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ORP.Business.Repositories
 {
@@ -10,7 +11,10 @@ namespace ORP.Business.Repositories
         {
             using (var context = new OrpContext())
             {
-                return context.Users.FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
+                return context.Users
+                    .Include(x => x.Clearance)
+                    .Include(x => x.Orders)
+                    .FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
             }
         }
 
