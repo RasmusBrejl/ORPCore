@@ -1,12 +1,17 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using ORP.Business.Repositories;
+using System.Collections.Generic;
+using ORP.Business.Services;
 using ORP.Models;
 using ORP.Models.Enums;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using ORP.Business.Repositories;
+using ORPCore.Business;
 using ORPCore.Business.Repositories;
 using ORPCore.Business.Services;
 
-namespace ORPCore.Controllers
+namespace ORP.Controllers
 {
     public class RequestRouteController : Controller
     {
@@ -15,6 +20,14 @@ namespace ORPCore.Controllers
         public RequestRouteController()
         {
             _routeService = new RouteService(new ConnectionRepository(), new CityRepository());
+        }
+
+        [HttpGet]
+        public List<Order> CalculateRoute(string city1, string city2, [FromBody] Parcel parcel)
+        {
+            var cityOne = _routeService.GetCity(city1);
+            var cityTwo = _routeService.GetCity(city2);
+            return new RoutePlannerGraph(cityOne, cityTwo, _routeService, parcel).ComputeRoutes();
         }
 
         [HttpGet]

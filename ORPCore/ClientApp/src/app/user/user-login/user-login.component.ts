@@ -28,8 +28,8 @@ public playerName: any;
 
   public ngOnInit() {
     this.user = new User();
-    this.user.name = "1";
-    this.user.password = "2";
+    this.user.name = "";
+    this.user.password = "";
   }
 
   public login(){
