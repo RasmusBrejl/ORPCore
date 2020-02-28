@@ -23,7 +23,15 @@ export class RoutePlannerComponent {
   public depth: string;
   public width: string;
 
+  public types: { id: number, name: string, checked: boolean }[] = [
+    { "id": 0, "name": "Weapon", checked: false },
+    { "id": 1, "name": "Fragile", checked: false },
+    { "id": 2, "name": "Cold", checked: false}
+];
+  public negativeWeight: boolean;
+
   public ngOnInit() {
+
     this.parcel = new Parcel();
 
     this.parcel.weight = "";
@@ -54,6 +62,11 @@ export class RoutePlannerComponent {
 
     public calculate() {
         var route = this.userService.calculate(this.parcel,this.destination,this.endDestination).then(res => console.log(res));
+    }
+
+    public isChangeLimitAccessToggle(type) {
+        type.checked = !type.checked;
+        console.log(this.types);
     }
 
 }
