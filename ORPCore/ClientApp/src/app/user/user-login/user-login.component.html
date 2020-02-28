@@ -1,20 +1,10 @@
+<input type="text" placeholder="Insert username" id="name" name="name" required
+       minlength="1" maxlength="10" size="50">
+       
+<input type="password" placeholder="Insert password" id="password" name="password" required
+    minlength="1" maxlength="10" size="50">
+    
+    <p>Insert your login details</p>
+    <button (click)="login()">Login</button>
 
-<body>
-    <div>
-    <div align="center" >
-        <img src="../../../assets/oceanic_airlines_logo.png" alt="Oceanic Airlines" width="200" height="250" style="background-color:white;">        
-    </div>
-    <div align="center" style="margin-top:50px;">
-        <input type="text" placeholder="Insert username" id="name" name="name" required
-    minlength="1" maxlength="10" size="50" [value]="user.name" (input)="user.name = $event.target.value">
-    </div>
-    <div align="center">
-        <input type="password" placeholder="Insert password" id="password" name="password" required
-        minlength="1" maxlength="10" size="50" [value]="user.password" (input)="user.password = $event.target.value">
-                <p><b>Insert your login details</b></p>
-        <button (click)="login()">Login</button>
-
-        <p *ngIf="loginfailed">Couldn't find the user<p>                        
-    </div>
-    </div>
-</body>
+        <p *ngIf="loginfailed">Couldn't find the user<p>
